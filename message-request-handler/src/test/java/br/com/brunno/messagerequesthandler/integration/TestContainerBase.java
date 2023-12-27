@@ -3,6 +3,7 @@ package br.com.brunno.messagerequesthandler.integration;
 import io.awspring.cloud.sqs.operations.SqsTemplate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.localstack.LocalStackContainer;
@@ -11,7 +12,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 import software.amazon.awssdk.services.sqs.SqsAsyncClient;
 
-@Testcontainers
+@Testcontainers(disabledWithoutDocker = true)
 public abstract class TestContainerBase {
 
     protected static DockerImageName localstackImage = DockerImageName.parse("localstack/localstack:3.0.2");

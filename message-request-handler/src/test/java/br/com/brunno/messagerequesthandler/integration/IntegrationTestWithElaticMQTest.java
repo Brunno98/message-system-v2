@@ -6,11 +6,12 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.awspring.cloud.sqs.operations.SqsTemplate;
 import lombok.extern.slf4j.Slf4j;
+import org.elasticmq.rest.sqs.SQSRestServer;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +23,13 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
+@Slf4j
+@Import(SqsInMemoryTest.class)
 @SpringBootTest(webEnvironment = RANDOM_PORT)
-public class MessageRequestHandlerIntegrationTest extends TestContainerBase {
+public class IntegrationTestWithElaticMQTest {
+
+    @Autowired
+    SQSRestServer sqsRestServer; // init sqs in-memory server
 
     @Autowired
     SqsTemplate sqsTemplate;
@@ -67,5 +73,4 @@ public class MessageRequestHandlerIntegrationTest extends TestContainerBase {
                 .as("message in queue should be equals to expected")
                 .isEqualTo(messageExpected);
     }
-
 }
