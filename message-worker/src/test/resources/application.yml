@@ -1,0 +1,13 @@
+logging:
+  level:
+    br:
+      com:
+        brunno98:
+          messageworker: DEBUG
+
+sqs:
+  server:
+    protocol: "http"
+    host: "localhost"
+    port: 9321
+    contextPath: ""
