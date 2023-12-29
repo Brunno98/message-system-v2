@@ -1,0 +1,4 @@
+application:
+  queue:
+    consumer-queue: 'foo'
+    producer-queue: 'bar'

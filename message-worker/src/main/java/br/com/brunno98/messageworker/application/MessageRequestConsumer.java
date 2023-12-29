@@ -7,6 +7,7 @@ import io.awspring.cloud.sqs.annotation.SqsListener;
 import io.awspring.cloud.sqs.operations.SqsTemplate;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Slf4j
@@ -17,7 +18,10 @@ public class MessageRequestConsumer {
     private final MessageClient messageClient;
     private final ObjectMapper OM;
 
-    @SqsListener("message-request-queue")
+    @Value("${application.queue.producer-queue}")
+    private String producerQueue;
+
+    @SqsListener("${application.queue.consumer-queue}")
     public void process(String rawPayload) throws JsonProcessingException {
         log.debug("starting consuming message");
         MessageRequestPayload payload = OM.readValue(rawPayload, MessageRequestPayload.class);
@@ -34,7 +38,7 @@ public class MessageRequestConsumer {
         Message message = Message.from(payload, text);
 
         log.debug("sending message to queue");
-        sqsTemplate.send("send-message-queue", OM.writeValueAsString(message));
+        sqsTemplate.send(producerQueue, OM.writeValueAsString(message));
         log.info("messege sended to queue successfully");
     }
 }

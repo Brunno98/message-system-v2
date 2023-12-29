@@ -5,6 +5,11 @@ logging:
         brunno98:
           messageworker: DEBUG
 
+application:
+  queue:
+    consumer-queue: 'foo'
+    producer-queue: 'bar'
+
 sqs:
   server:
     protocol: "http"
