@@ -1,0 +1,1 @@
+![diagram](docs/message-worker.svg)
