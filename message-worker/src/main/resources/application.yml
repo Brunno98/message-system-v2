@@ -2,3 +2,6 @@ application:
   queue:
     consumer-queue: 'foo'
     producer-queue: 'bar'
+  client:
+    message-client:
+      url: localhost:8081

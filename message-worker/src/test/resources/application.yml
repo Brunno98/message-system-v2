@@ -7,8 +7,11 @@ logging:
 
 application:
   queue:
-    consumer-queue: 'foo'
-    producer-queue: 'bar'
+    consumer-queue: 'some-consumer-queue'
+    producer-queue: 'some-producer-queue'
+  client:
+    message-client:
+      url: localhost:${wiremock.server.port}
 
 sqs:
   server:

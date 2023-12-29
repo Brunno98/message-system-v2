@@ -28,7 +28,7 @@ import static org.awaitility.Awaitility.await;
 @EnableFeignClients
 @Import(value = {AwsClientConfig.class, SQSRestServerStarter.class})
 @SpringBootTest
-@AutoConfigureWireMock(port = 8081) //TODO: boas praticas de configuracao do wiremock
+@AutoConfigureWireMock(port = 0)
 public class MessageRequestConsumerIntegrationTest {
     public static final String REQUEST_PAYLAOD = """
                 {
