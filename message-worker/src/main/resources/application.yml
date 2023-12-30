@@ -1,7 +1,17 @@
 application:
   queue:
-    consumer-queue: 'foo'
-    producer-queue: 'bar'
+    consumer-queue: 'message-request-queue'
+    producer-queue: 'send-message-queue'
   client:
     message-client:
       url: localhost:8081
+
+spring:
+  cloud:
+    aws:
+      endpoint: http://localhost:4566
+      credentials:
+        access-key: localstack
+        secret-key: localstack
+      region:
+        static: us-east-1
