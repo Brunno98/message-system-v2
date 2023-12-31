@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+  cloud:
+    aws:
+      endpoint: http://localhost:9432
+      credentials:
+        access-key: x
+        secret-key: x
+      region:
+        static: us-east-1
+
+logging:
+  level:
+    br:
+      com:
+        brunno98:
+          messagesender:
+            inbox: DEBUG
