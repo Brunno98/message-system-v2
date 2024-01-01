@@ -1,0 +1,79 @@
+version: "3.8"
+
+services:
+  message-request-handler:
+    build:
+      context: ./message-request-handler
+    ports:
+      - 8080:8080
+    depends_on:
+      - localstack
+    environment:
+      - SPRING_PROFILES_ACTIVE=container
+      - AWS_URL=http://localstack:4566
+      - AWS_ACCESS_KEY=localstack
+      - AWS_SECRET_KEY=localstack
+      - AWS_REGION=us-east-1
+
+  message-worker:
+    build: 
+      context: ./message-worker/
+    environment:
+      - SPRING_PROFILES_ACTIVE=container
+      - MESSAGE_CLIENT_URL=http://message-store-service:8080
+      - AWS_URL=http://localstack:4566
+      - ACCESS_KEY=localstack
+      - SECRET_KEY=localstack
+      - AWS_REGION=us-east-1
+    depends_on:
+      - localstack
+      - message-store-service
+
+  message-store-service:
+    build:
+      context: ./message-store-service/
+    environment:
+      - SPRING_PROFILES_ACTIVE=container
+      - DATABASE_HOST=db
+      - DATABASE_DB=postgres
+      - DATABASE_USERNAME=postgres
+      - DATABASE_PASSWORD=password
+    depends_on:
+      - db
+
+  message-sender:
+    build:
+      context: ./message-sender/
+    environment:
+      - SPRING_PROFILES_ACTIVE=container
+      - DATABASE_HOST=db
+      - DATABASE_DB=postgres
+      - DATABASE_USERNAME=postgres
+      - DATABASE_PASSWORD=password
+      - AWS_URL=http://localstack:4566
+      - AWS_ACCESS_KEY=localstack
+      - AWS_SECRET_KEY=localstack
+      - AWS_REGION=us-east-1
+    depends_on:
+      - db
+      - localstack
+
+  db:
+    image: postgres:13.11
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=pass
+      - POSTGRES_HOST_AUTH_METHOD=trust
+
+  localstack:
+    container_name: "${LOCALSTACK_DOCKER_NAME-localstack-main}"
+    image: localstack/localstack
+    ports:
+      - "127.0.0.1:4566:4566"            # LocalStack Gateway
+      - "127.0.0.1:4510-4559:4510-4559"  # external services port range
+    environment:
+      - DEBUG=${DEBUG-}
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    volumes:
+      - "${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
