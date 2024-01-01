@@ -16,6 +16,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.Message;
+import org.springframework.test.annotation.DirtiesContext;
 
 import java.util.Map;
 import java.util.Optional;
@@ -23,6 +24,7 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
+@DirtiesContext
 @Slf4j
 @Import(SqsInMemoryTest.class)
 @SpringBootTest(webEnvironment = RANDOM_PORT)

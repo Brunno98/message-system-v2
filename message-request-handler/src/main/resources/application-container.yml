@@ -1,0 +1,9 @@
+spring:
+  cloud:
+    aws:
+      endpoint: ${AWS_URL}
+      credentials:
+        access-key: ${AWS_ACCESS_KEY}
+        secret-key: ${AWS-SECRET_KEY}
+      region:
+        static: ${AWS_REGION}
