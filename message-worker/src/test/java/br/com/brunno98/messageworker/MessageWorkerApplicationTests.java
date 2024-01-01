@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.test.annotation.DirtiesContext;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
@@ -14,6 +15,7 @@ import software.amazon.awssdk.services.sqs.SqsAsyncClient;
 
 import java.net.URI;
 
+@DirtiesContext
 @SpringBootTest
 public class MessageWorkerApplicationTests {
 

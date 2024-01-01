@@ -15,6 +15,7 @@ import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Import;
 import org.springframework.messaging.Message;
+import org.springframework.test.annotation.DirtiesContext;
 
 import java.util.Optional;
 
@@ -29,6 +30,7 @@ import static org.awaitility.Awaitility.await;
 @Import(value = {AwsClientConfig.class, SQSRestServerStarter.class})
 @SpringBootTest
 @AutoConfigureWireMock(port = 0)
+@DirtiesContext
 public class MessageRequestConsumerIntegrationTest {
     public static final String REQUEST_PAYLAOD = """
                 {

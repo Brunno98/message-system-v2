@@ -1,0 +1,17 @@
+application:
+  queue:
+    consumer-queue: 'message-request-queue'
+    producer-queue: 'send-message-queue'
+  client:
+    message-client:
+      url: ${MESSAGE_CLIENT_URL}
+
+spring:
+  cloud:
+    aws:
+      endpoint: ${AWS_URL}
+      credentials:
+        access-key: ${ACCESS_KEY}
+        secret-key: ${SECRET_KEY}
+      region:
+        static: ${AWS_REGION}
