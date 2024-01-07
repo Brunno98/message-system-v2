@@ -56,9 +56,6 @@ public class MessageRequestConsumerIntegrationTest {
     private String producerQueue;
 
     @Autowired
-    private SQSRestServerStarter sqsRestServerStarter;
-
-    @Autowired
     private SqsTemplate sqsTemplate;
 
     @Test

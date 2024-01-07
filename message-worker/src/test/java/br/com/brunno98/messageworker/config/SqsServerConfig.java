@@ -6,7 +6,7 @@ import org.springframework.boot.test.context.TestConfiguration;
 
 @Data
 @TestConfiguration
-@ConfigurationProperties(prefix = "sqs.server")
+@ConfigurationProperties(prefix = "application.sqs.server")
 public class SqsServerConfig {
     private String protocol;
     private String host;

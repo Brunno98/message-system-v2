@@ -11,11 +11,10 @@ application:
     producer-queue: 'some-producer-queue'
   client:
     message-client:
-      url: localhost:${wiremock.server.port}
-
-sqs:
-  server:
-    protocol: "http"
-    host: "localhost"
-    port: 9321
-    contextPath: ""
+      url: http://localhost:${wiremock.server.port}
+  sqs:
+    server:
+      protocol: "http"
+      host: "localhost"
+      port: 9321
+      contextPath: ""
