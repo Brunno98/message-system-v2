@@ -38,6 +38,6 @@ public class MessageRequestConsumer {
 
         log.debug("sending message to queue");
         sqsTemplate.send(producerQueue, OM.writeValueAsString(message));
-        log.info("messege sent to queue successfully");
+        log.info("message sent to queue successfully");
     }
 }
