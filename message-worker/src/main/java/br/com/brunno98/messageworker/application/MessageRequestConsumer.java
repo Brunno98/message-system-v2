@@ -32,13 +32,12 @@ public class MessageRequestConsumer {
 
         log.debug("searching for text from key");
         String text = messageClient.getTextFromKey(payload.getKey());
-        // TODO: servidor em memoria para teste
         log.info("text got from key");
 
         Message message = Message.from(payload, text);
 
         log.debug("sending message to queue");
         sqsTemplate.send(producerQueue, OM.writeValueAsString(message));
-        log.info("messege sended to queue successfully");
+        log.info("messege sent to queue successfully");
     }
 }
